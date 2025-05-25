@@ -1,0 +1,104 @@
+# ========================
+# General
+# ========================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+.env
+.env.local
+.env.development
+.env.production
+.venv
+.idea
+.vscode
+
+# ========================
+# Backend (Python/FastAPI)
+# ========================
+# Bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# Database
+*.sqlite3
+*.db
+
+# Logs
+logs/
+
+# Whisper cache
+.cache/
+
+# ========================
+# Frontend (React/Vue/Static)
+# ========================
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+dist/
+build/
+.next/
+out/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local development
+.svelte-kit
+.vite/
+.husky/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production
+.cache/
+.serverless/
