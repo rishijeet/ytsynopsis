@@ -32,6 +32,8 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   padding: var(--space-md);
+  min-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* ======================== */
@@ -205,4 +207,22 @@ input[type="url"]:focus {
 
 .copy-btn:active {
   transform: scale(0.98);
+}
+
+/* ======================== */
+/* Enhanced Footer Styles */
+/* ======================== */
+.app-footer {
+    width: 100%;
+    text-align: center !important;
+    padding: 1.5rem 0;
+    margin: 2rem 0 0;
+}
+
+.app-footer p {
+    margin: 0 auto;
+    display: inline-block;
+    color: #606060;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }

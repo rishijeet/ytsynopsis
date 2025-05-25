@@ -1,8 +1,7 @@
 
-# YouTube Video Summarizer
+# YouTube Summarizer
 
-A Python-based tool that automatically summarizes YouTube video content using Whisper speech recognition and AI-powered NLP.
-# Copyright (c) 2025 Rishijeet Mishra
+A Python-based tool that automatically summarizes YouTube  content using Whisper speech recognition and AI-powered NLP. I have built this with the use case wherein I can get text/summary of amazing podcast, interviews, videos and keynotes and then using LLM can get crux of their point of views. 
 
 ## Features
 - 🎥 Extract audio from YouTube videos
@@ -30,23 +29,8 @@ A Python-based tool that automatically summarizes YouTube video content using Wh
    uvicorn app.main:app --reload
    ```
    Access at: http://localhost:8000
-
-## Project Structure
-
-## API Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | Web interface for file upload |
-| `/transcribe` | POST | Process audio file (returns JSON) |
-
-## API Usage
-```bash
-POST /summarize
-Body: { "youtube_url": "https://youtube.com/watch?v=..." }
-```
+   ```
+## Copyright (c) 2025 Rishijeet Mishra. MIT License
 
 ## Contributing
 Pull requests welcome! For major changes, please open an issue first.
-
-## License
-MIT
