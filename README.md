@@ -1,6 +1,8 @@
+
 # YouTube Video Summarizer
 
 A Python-based tool that automatically summarizes YouTube video content using Whisper speech recognition and AI-powered NLP.
+# Copyright (c) 2025 Rishijeet Mishra
 
 ## Features
 - 🎥 Extract audio from YouTube videos

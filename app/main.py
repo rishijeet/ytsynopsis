@@ -1,3 +1,8 @@
+"""
+YouTube Video Summarizer
+Copyright (c) 2025 Rishijeet Mishra
+"""
+
 from fastapi import FastAPI, UploadFile, HTTPException, File, Request, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, FileResponse, StreamingResponse

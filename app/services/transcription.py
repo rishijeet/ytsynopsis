@@ -1,3 +1,7 @@
+"""
+YouTube Video Summarizer
+Copyright (c) 2025 Rishijeet Mishra
+"""
 import whisper
 import os
 from tempfile import NamedTemporaryFile
