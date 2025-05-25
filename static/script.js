@@ -111,13 +111,13 @@ eventSource.onmessage = function(e) {
 document.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    const form = e.target;
-    const formData = new FormData(form);
-    const youtubeUrl = formData.get('youtube_url');
+    // Show spinner
+    const spinner = document.getElementById('loadingSpinner');
+    spinner.style.display = 'flex';
     
     try {
-        // Show loading state
-        document.getElementById('progressContainer').style.display = 'block';
+        const formData = new FormData(e.target);
+        const youtubeUrl = formData.get('youtube_url');
         
         const response = await fetch('/transcribe', {
             method: 'POST',
@@ -127,11 +127,8 @@ document.querySelector('form').addEventListener('submit', async (e) => {
             body: `youtube_url=${encodeURIComponent(youtubeUrl)}`
         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || "Transcription failed");
-        }
-
+        if (!response.ok) throw new Error('Transcription failed');
+        
         const result = await response.text();
         document.open();
         document.write(result);
@@ -139,10 +136,10 @@ document.querySelector('form').addEventListener('submit', async (e) => {
         
     } catch (error) {
         console.error('Error:', error);
-        showErrorToast(error.message);  // Implement this UI function
+        alert(`Error: ${error.message}`);
     } finally {
-        // Hide loading state
-        document.getElementById('progressContainer').style.display = 'none';
+        // Hide spinner in case of success or error
+        spinner.style.display = 'none';
     }
 });
 
