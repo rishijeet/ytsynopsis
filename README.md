@@ -1,41 +1,35 @@
-# Audio Transcription API
+# YouTube Video Summarizer
 
-A FastAPI backend for audio-to-text transcription using OpenAI's Whisper model.
+A Python-based tool that automatically summarizes YouTube video content using Whisper speech recognition and AI-powered NLP.
 
 ## Features
-- 🎤 Upload MP3 files and get text transcripts
-- ⚡ FastAPI backend with async processing
-- 🔍 Powered by OpenAI's Whisper (offline)
-- 📁 Progress tracking for long audio files
+- 🎥 Extract audio from YouTube videos
+- 🎤 Convert speech to text using Whisper
+- ✂️ Generate concise summaries with NLP
+- 🚀 FastAPI backend with modern UI
 
-## Prerequisites
-- Python 3.8+
-- GPU recommended (but works on CPU)
-
-## Installation
+## Quick Start
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/audio-transcription.git
-   cd audio-transcription
+   git clone https://github.com/rishijeet/ytsynopsis.git
+   cd ytsynopsis
    ```
 
-2. Create and activate virtual environment:
+2. Set up environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # Linux/macOS
    .\venv\Scripts\activate  # Windows
-   ```
-
-3. Install dependencies:
-   ```bash
    pip install -r requirements.txt
    ```
 
-## Running the Server
-```bash
-uvicorn app.main:app --reload
-```
-Access the web interface at: http://localhost:8000
+3. Run the server:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+   Access at: http://localhost:8000
+
+## Project Structure
 
 ## API Endpoints
 | Endpoint | Method | Description |
@@ -43,4 +37,14 @@ Access the web interface at: http://localhost:8000
 | `/` | GET | Web interface for file upload |
 | `/transcribe` | POST | Process audio file (returns JSON) |
 
+## API Usage
+```bash
+POST /summarize
+Body: { "youtube_url": "https://youtube.com/watch?v=..." }
+```
 
+## Contributing
+Pull requests welcome! For major changes, please open an issue first.
+
+## License
+MIT
