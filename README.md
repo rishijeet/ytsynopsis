@@ -30,7 +30,5 @@ A Python-based tool that automatically summarizes YouTube  content using Whisper
    ```
    Access at: http://localhost:8000
    ```
-## Copyright (c) 2025 Rishijeet Mishra. MIT License
-
-## Contributing
-Pull requests welcome! For major changes, please open an issue first.
+## Copyright
+2025 Rishijeet Mishra. MIT License
