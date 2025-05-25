@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcription Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card result-card">
+            <div class="header">
+                <i class="fas fa-file-alt icon"></i>
+                <h1>Transcription Complete</h1>
+            </div>
+            
+            <div class="transcript-container">
+                <div class="transcript-header">
+                    <span>Transcript:</span>
+                    <button onclick="copyTranscript()" class="copy-btn">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="transcript-content" id="transcriptText">
+                    {{ transcript if transcript else "No transcript available" }}
+                </div>
+            </div>
+            
+            <a href="/" class="home-link">
+                <i class="fas fa-arrow-left"></i> Upload Another File
+            </a>
+        </div>
+    </div>
+
+    <script>
+    // Simple copy function right in the HTML
+    function copyTranscript() {
+        const transcriptEl = document.getElementById('transcriptText');
+        const textToCopy = transcriptEl.innerText;
+        
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                const copyBtn = document.querySelector('.copy-btn');
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Copy failed:', err);
+                // Fallback for older browsers
+                const range = document.createRange();
+                range.selectNode(transcriptEl);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Text copied to clipboard!');
+            });
+    }
+    </script>
+</body>
+</html>

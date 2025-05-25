@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Transcriber</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <i class="fas fa-microphone-alt icon"></i>
+                <h1>Audio Transcription</h1>
+                <p>Upload an MP3 file to convert to text</p>
+            </div>
+            
+            <form action="/transcribe" method="post" enctype="multipart/form-data" class="upload-box" id="uploadForm">
+                <input type="file" name="file" id="fileInput" accept=".mp3" required>
+                <label for="fileInput" class="file-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span id="fileName">Choose an MP3 file</span>
+                </label>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Transcribe
+                </button>
+            </form>
+            
+            <div class="progress-container" id="progressContainer" style="display: block;">
+                <div class="progress-bar" id="progressBar"></div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
