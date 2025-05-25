@@ -7,63 +7,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transcription Results</title>
+    <title>Transcript Ready | YouTube Transcriber</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="/static/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card result-card">
-            <div class="header">
-                <i class="fas fa-file-alt icon"></i>
-                <h1>Transcription Complete</h1>
+    <div class="app-container result-view">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <h1>YouTube<span>Transcriber</span></h1>
             </div>
-            
-            <div class="transcript-container">
-                <div class="transcript-header">
-                    <span>Transcript:</span>
-                    <button onclick="copyTranscript()" class="copy-btn">
-                        <i class="far fa-copy"></i> Copy
-                    </button>
+        </header>
+
+        <main class="main-content">
+            <div class="result-card glassmorphism">
+                <div class="result-header">
+                    <h2><i class="fas fa-file-alt"></i> Transcript Ready</h2>
+                    <div class="action-buttons">
+                        <button id="copyButton" class="icon-button">
+                            <i class="far fa-copy"></i> Copy
+                        </button>
+                        <a href="/" class="icon-button">
+                            <i class="fas fa-redo"></i> New Video
+                        </a>
+                    </div>
                 </div>
-                <div class="transcript-content" id="transcriptText">
-                    {{ transcript if transcript else "No transcript available" }}
+
+                <div class="transcript-container">
+                    <div class="transcript-content" id="transcriptText">
+                        {{ transcript if transcript else "No transcript available" }}
+                    </div>
+                </div>
+
+                <div class="video-info">
+                    <div class="chip">
+                        <i class="fas fa-clock"></i> Duration: <span id="videoDuration">--:--</span>
+                    </div>
+                    <div class="chip">
+                        <i class="fas fa-file-word"></i> Words: <span id="wordCount">0</span>
+                    </div>
                 </div>
             </div>
-            
-            <a href="/" class="home-link">
-                <i class="fas fa-arrow-left"></i> Upload Another File
-            </a>
-        </div>
+        </main>
     </div>
 
     <script>
-    // Simple copy function right in the HTML
-    function copyTranscript() {
-        const transcriptEl = document.getElementById('transcriptText');
-        const textToCopy = transcriptEl.innerText;
+    document.addEventListener('DOMContentLoaded', function() {
+        const transcript = document.getElementById('transcriptText').innerText;
+        document.getElementById('wordCount').textContent = transcript.split(/\s+/).length;
         
-        navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-                const copyBtn = document.querySelector('.copy-btn');
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
-                }, 2000);
-            })
-            .catch(err => {
-                console.error('Copy failed:', err);
-                // Fallback for older browsers
-                const range = document.createRange();
-                range.selectNode(transcriptEl);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-                document.execCommand('copy');
-                window.getSelection().removeAllRanges();
-                alert('Text copied to clipboard!');
-            });
-    }
+        document.getElementById('copyButton').addEventListener('click', function() {
+            navigator.clipboard.writeText(transcript)
+                .then(() => {
+                    const btn = this;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                    }, 2000);
+                });
+        });
+    });
     </script>
 </body>
 </html>

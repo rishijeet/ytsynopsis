@@ -107,3 +107,55 @@ eventSource.onmessage = function(e) {
         window.location.href = "/result";  // Redirect when done
     }
 };
+
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const youtubeUrl = formData.get('youtube_url');
+    
+    try {
+        // Show loading state
+        document.getElementById('progressContainer').style.display = 'block';
+        
+        const response = await fetch('/transcribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `youtube_url=${encodeURIComponent(youtubeUrl)}`
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Transcription failed");
+        }
+
+        const result = await response.text();
+        document.open();
+        document.write(result);
+        document.close();
+        
+    } catch (error) {
+        console.error('Error:', error);
+        showErrorToast(error.message);  // Implement this UI function
+    } finally {
+        // Hide loading state
+        document.getElementById('progressContainer').style.display = 'none';
+    }
+});
+
+// static/script.js - Ensure proper form encoding
+async function submitForm() {
+  const formData = new URLSearchParams();
+  formData.append('youtube_url', youtubeUrlInput.value);
+  
+  const response = await fetch('/transcribe', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }
+  });
+}

@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import logging
 from pydantic import BaseModel
 import time
+from app.utils.youtube import download_audio
 
 # Load environment variables
 load_dotenv()
@@ -62,29 +63,36 @@ class TranscriptionResponse(BaseModel):
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/transcribe", response_class=HTMLResponse)
-async def transcribe_ui(request: Request, file: UploadFile = File(...)):
+@app.post("/transcribe")
+async def transcribe(request: Request, youtube_url: str = Form(...)):
     try:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
-            tmp.write(await file.read())
-            result = model.transcribe(tmp.name)
-            transcript = result["text"]
-        os.unlink(tmp.name)
-
-        # Debug print to verify transcript
-        print(f"DEBUG - Transcript: {transcript}")
-
-        return templates.TemplateResponse(
-            "result.html", 
-            {
-                "request": request,
-                "transcript": transcript
-            }
-        )
+        if not youtube_url.startswith(('http://', 'https://')):
+            raise ValueError("Invalid URL format")
+            
+        audio_path = download_audio(youtube_url)
+        
+        try:
+            result = model.transcribe(audio_path)
+            return templates.TemplateResponse(
+                "result.html",
+                {"request": request, "transcript": result["text"]}
+            )
+        finally:
+            # Ensure cleanup even if transcription fails
+            if os.path.exists(audio_path):
+                os.unlink(audio_path)
+                temp_dir = os.path.dirname(audio_path)
+                if temp_dir.startswith(tempfile.gettempdir()):
+                    try:
+                        os.rmdir(temp_dir)
+                    except OSError:
+                        pass
+                        
     except Exception as e:
         return templates.TemplateResponse(
-            "error.html", 
-            {"request": request, "error": str(e)}
+            "error.html",
+            {"request": request, "error": str(e)},
+            status_code=400
         )
 
 # New endpoint for progress updates

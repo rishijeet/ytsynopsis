@@ -7,36 +7,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Transcriber</title>
+    <title>YouTube Transcriber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <i class="fas fa-microphone-alt icon"></i>
-                <h1>Audio Transcription</h1>
-                <p>Upload an MP3 file to convert to text</p>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <h1>YouTube<span>Transcriber</span></h1>
             </div>
-            
-            <form action="/transcribe" method="post" enctype="multipart/form-data" class="upload-box" id="uploadForm">
-                <input type="file" name="file" id="fileInput" accept=".mp3" required>
-                <label for="fileInput" class="file-label">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <span id="fileName">Choose an MP3 file</span>
-                </label>
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Transcribe
-                </button>
-            </form>
-            
-            <div class="progress-container" id="progressContainer" style="display: block;">
-                <div class="progress-bar" id="progressBar"></div>
-                <span class="progress-text" id="progressText">0%</span>
+            <p class="tagline">Get instant transcripts from any YouTube video</p>
+        </header>
+
+        <main class="main-content">
+            <div class="input-card glassmorphism">
+                <form id="transcribeForm" method="POST" action="/transcribe">
+                    <div class="input-group">
+                        <i class="fas fa-link"></i>
+                        <input type="url" name="youtube_url" 
+                               placeholder="Paste YouTube link here..." required>
+                    </div>
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-wave-square"></i> Generate Transcript
+                    </button>
+                </form>
+
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-details">
+                        <span id="progressText">0%</span>
+                        <span id="statusText">Ready</span>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="instructions">
+                <h3>How it works:</h3>
+                <ol>
+                    <li><i class="fas fa-copy"></i> Paste any YouTube video URL</li>
+                    <li><i class="fas fa-cogs"></i> We'll process the audio</li>
+                    <li><i class="fas fa-file-alt"></i> Get your full transcript</li>
+                </ol>
+            </div>
+        </main>
     </div>
 
     <script src="/static/script.js"></script>
