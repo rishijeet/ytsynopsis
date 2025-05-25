@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('fileInput');
     const fileName = document.getElementById('fileName');
     const uploadForm = document.getElementById('uploadForm');
-    const progressContainer = document.getElementById('progressContainer');
-    const progressBar = document.querySelector('.progress-bar');
-    const progressText = document.getElementById('progressText');
 
     // Update filename display
     fileInput.addEventListener('change', function(e) {
@@ -15,9 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // AJAX upload with animated progress
     uploadForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        progressContainer.style.display = 'block';
-        progressBar.style.width = '0%';
-        progressText.textContent = '0%';
 
         // Simulate progress (polling)
         const simulateProgress = async () => {
@@ -30,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: `${progress}%`,
                     duration: 0.3,
                     onUpdate: () => {
-                        progressText.textContent = `${progress}%`;
+                        // progressText.textContent = `${progress}%`;
                     }
                 });
 
@@ -88,7 +82,6 @@ function resetProgress() {
         width: '0%',
         duration: 0.5
     });
-    progressText.textContent = '0%';
 }
 
 // Replace the XHR logic with this:
@@ -99,7 +92,7 @@ eventSource.onmessage = function(e) {
         width: `${percent}%`,
         duration: 0.3,
         onUpdate: () => {
-            progressText.textContent = `${percent}%`;
+            // progressText.textContent = `${percent}%`;
         }
     });
     if (percent === 100) {
@@ -108,11 +101,14 @@ eventSource.onmessage = function(e) {
     }
 };
 
-document.querySelector('form').addEventListener('submit', async (e) => {
+document.getElementById('transcribeForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Show spinner
-    const spinner = document.getElementById('loadingSpinner');
+    const button = document.getElementById('transcribeBtn');
+    const spinner = document.getElementById('buttonSpinner');
+    
+    // Disable button and show spinner
+    button.disabled = true;
     spinner.style.display = 'flex';
     
     try {
@@ -138,7 +134,8 @@ document.querySelector('form').addEventListener('submit', async (e) => {
         console.error('Error:', error);
         alert(`Error: ${error.message}`);
     } finally {
-        // Hide spinner in case of success or error
+        // Re-enable button and hide spinner
+        button.disabled = false;
         spinner.style.display = 'none';
     }
 });

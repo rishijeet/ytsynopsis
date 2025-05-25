@@ -24,24 +24,22 @@
 
         <main class="main-content">
             <div class="input-card glassmorphism">
-                <form id="transcribeForm" method="POST" action="/transcribe">
+                <form method="POST" action="/transcribe" id="transcribeForm">
                     <div class="input-group">
                         <i class="fas fa-link"></i>
                         <input type="url" name="youtube_url" 
                                placeholder="Paste YouTube link here..." required>
                     </div>
-                    <button type="submit" class="cta-button">
-                        <i class="fas fa-wave-square"></i> Generate Transcript
-                    </button>
-                </form>
-
-                <div class="progress-container" id="progressContainer">
-                    <div class="progress-bar" id="progressBar"></div>
-                    <div class="progress-details">
-                        <span id="progressText">0%</span>
-                        <span id="statusText">Ready</span>
+                    
+                    <div class="button-container">
+                        <button type="submit" class="cta-button" id="transcribeBtn">
+                            Generate Transcript
+                        </button>
+                        <div id="buttonSpinner" class="button-spinner">
+                            <div class="spinner-circle"></div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="instructions">

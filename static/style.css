@@ -116,45 +116,6 @@ input[type="url"]:focus {
 }
 
 /* ======================== */
-/* Enhanced Progress Bar */
-/* ======================== */
-.progress-container {
-  margin-top: var(--space-md);
-  width: 100%;
-}
-
-.progress-bar {
-  height: 8px;
-  background: linear-gradient(90deg, var(--yt-red), #ff6b6b);
-  border-radius: 4px;
-  width: 0%;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.7),
-    transparent
-  );
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-/* ======================== */
-
 /* Modern Transcript UI */
 /* ======================== */
 .transcript-container {
@@ -263,4 +224,47 @@ input[type="url"]:focus {
     color: var(--yt-dark);
     font-weight: 500;
     margin-top: 1rem;
+}
+
+/* ======================== */
+/* Button & Spinner Styles */
+/* ======================== */
+.button-container {
+    position: relative;
+    margin-top: 1.5rem;
+}
+
+.button-spinner {
+    display: none;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.spinner-circle {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 0, 0, 0.1);
+    border-top-color: var(--yt-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+/* Disabled state */
+.cta-button:disabled {
+    background-color: #ff9999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* DELETE these if they exist */
+.progress-text, 
+.progress-percent, 
+.ready-text {
+    display: none !important;
 }
