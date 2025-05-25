@@ -123,6 +123,10 @@ input[type="url"]:focus {
   background: rgba(255, 255, 255, 0.8);
   margin: var(--space-md) 0;
   overflow: hidden;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .transcript-header {
@@ -132,6 +136,9 @@ input[type="url"]:focus {
   padding: var(--space-sm) var(--space-md);
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
 }
 
 .transcript-content {
@@ -140,6 +147,49 @@ input[type="url"]:focus {
   overflow-y: auto;
   line-height: 1.8;
   white-space: pre-wrap;
+}
+
+#video-title {
+  color: #ff0000;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  word-break: break-word;
+}
+
+.video-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+.meta-item i {
+  color: #ff0000;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .meta-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .meta-item {
+    white-space: normal;
+  }
 }
 
 /* ======================== */
@@ -153,6 +203,12 @@ input[type="url"]:focus {
   
   .card {
     padding: var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .transcript-container {
+    max-width: 800px;
   }
 }
 

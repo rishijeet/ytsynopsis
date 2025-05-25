@@ -38,6 +38,15 @@
                 </div>
 
                 <div class="transcript-container">
+                    <div class="transcript-header">
+                        <h2 id="video-title">{{ video_title }}</h2>
+                        <div class="video-meta">
+                            <div class="meta-row">
+                                <span class="meta-item"><i class="fas fa-clock"></i> Duration: {{ video_duration }}</span>
+                                <span class="meta-item"><i class="fas fa-calendar"></i> Uploaded: {{ upload_date }}</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="transcript-content" id="transcriptText">
                         {{ transcript if transcript else "No transcript available" }}
                     </div>
