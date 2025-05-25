@@ -63,8 +63,10 @@ class TranscriptionResponse(BaseModel):
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/transcribe")
+@app.post("/transcribe", response_class=HTMLResponse)
 async def transcribe(request: Request, youtube_url: str = Form(...)):
+    start_time = time.time()  # Start timer
+    
     try:
         if not youtube_url.startswith(('http://', 'https://')):
             raise ValueError("Invalid URL format")
@@ -73,9 +75,19 @@ async def transcribe(request: Request, youtube_url: str = Form(...)):
         
         try:
             result = model.transcribe(audio_path)
+            os.unlink(audio_path)
+            
+            end_time = time.time()  # End timer
+            duration = end_time - start_time
+            mins, secs = divmod(int(duration), 60)
+            
             return templates.TemplateResponse(
                 "result.html",
-                {"request": request, "transcript": result["text"]}
+                {
+                    "request": request,
+                    "transcript": result["text"],
+                    "duration": f"{mins:02d}:{secs:02d}"  # Format as MM:SS
+                }
             )
         finally:
             # Ensure cleanup even if transcription fails

@@ -45,10 +45,12 @@
 
                 <div class="video-info">
                     <div class="chip">
-                        <i class="fas fa-clock"></i> Duration: <span id="videoDuration">--:--</span>
+                        <i class="fas fa-clock"></i> 
+                        Duration: <span id="videoDuration">{{ duration if duration else "--:--" }}</span>
                     </div>
                     <div class="chip">
-                        <i class="fas fa-file-word"></i> Words: <span id="wordCount">0</span>
+                        <i class="fas fa-file-word"></i> 
+                        Words: <span id="wordCount">0</span>
                     </div>
                 </div>
             </div>
@@ -61,8 +63,15 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Calculate word count
         const transcript = document.getElementById('transcriptText').innerText;
         document.getElementById('wordCount').textContent = transcript.split(/\s+/).length;
+        
+        // Ensure duration shows even if template variable fails
+        const durationEl = document.getElementById('videoDuration');
+        if (durationEl.textContent === '--:--') {
+            durationEl.textContent = '00:00';  // Fallback
+        }
         
         document.getElementById('copyButton').addEventListener('click', function() {
             navigator.clipboard.writeText(transcript)

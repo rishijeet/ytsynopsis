@@ -268,3 +268,23 @@ input[type="url"]:focus {
 .ready-text {
     display: none !important;
 }
+
+.video-info {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.chip {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chip i {
+    color: var(--yt-red);
+}
